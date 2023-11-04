@@ -1,7 +1,7 @@
 const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-import css from "file.css";
+// import css from "file.css";
 
 module.exports = {
     mode: 'development',
@@ -33,8 +33,8 @@ module.exports = {
     plugins: [
         new HtmlWebpackPlugin({
             title: 'Development',
-            template: 'index.html'
-        })
+            template: './client/public/index.html',
+          })
     ],
     devServer: {
         host: 'localhost',

@@ -24,7 +24,7 @@ app.use('/', router);
 
 // Route handler to respond with main app
 app.get('/', (req, res) => {
-    res.status(200).sendFile(path.join(__dirname, '../client/index.js'));
+    res.status(200).sendFile(path.join(__dirname, '../client/public/index.html'));
   });
 
 // CATCH-ALL ROUTE HANDLER
