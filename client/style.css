@@ -20,45 +20,80 @@ html, body {
   
   .bodyComponent {
     display: flex;
-    /* border: 5px solid black; */
-    justify-content: space-around;
-    align-items: flex-start;
   }
   
   .input-container {
     flex: 1;
-    /* padding: 15px; */
     background-color: rgba(248, 200, 233, 0.344);
-    height: 420px;
-    max-width: 275px;
+    max-width: 25%;
+    min-width: 150px;
     border-radius: 30px;
     margin-left: 15px;
     margin-top: 15px;
+    display: flex;
+    flex-direction: column;
+    padding: 6px;
+    position: sticky;
+    top: 10px;
+    max-height: 450px;
+    min-height: 400px;
   }
   
   .pet-card-holder-container {
-    flex: 1;
+    flex: 3;
     padding: 15px;
+    display: flex;
+    flex-direction: column;
   }
   
   .input-form {
+    flex: 1;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    justify-content: space-around;
     align-items: center;
     background-color: rgba(254, 253, 253, 0.503);
     height: 400px;
-    max-width: 255px;
     border-radius: 30px;
-    margin-left: 6px;
-    margin-top: 6px;
     border-style: outset;
     border-width: 4px;
     border-color: rgba(248, 200, 233, 0.442);
+    font-family: 'Lobster';
+    color: #575151;
   }
-  
+
+  .label {
+    text-align: center;
+  }
+
+  input, textarea {
+    text-align: center;
+  }
+
+  input {
+    border-radius: 10px;
+    border: 1px solid black;
+  }
+
+  input::placeholder {
+    font-family: 'Lobster';
+    opacity: .5;
+  }
+
+  textarea {
+    border-radius: 10px;
+    border: 1px solid black;
+    margin-top: 4px;
+  }
+
+  textarea::placeholder {
+    font-family: 'Lobster';
+    opacity: .5;
+  }
+
   .submitBtn {
-    align-self: flex-end;
-    margin-bottom: 15px;
+    /* align-self: flex-end; */
+    /* margin-bottom: 15px; */
     width: 80%;
     height: 7.5%;
     background-color: rgba(248, 200, 233, 0.344);
@@ -88,13 +123,16 @@ html, body {
   }
   
   .petCardHolder {
+    flex: 1;
+    height: 100%;
     height: 400px;
     width: 650px;
     display: grid;
-    grid-template-columns: repeat(3, 1fr); /* 3 columns with equal width */
-    grid-template-rows: repeat(2, auto); /* 2 rows with auto height */
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Dynamic columns with a minimum width of 200px */
+    grid-auto-rows: auto; /* Automatically size rows based on content */
     gap: 20px;
     margin-right: 15px;
+    justify-content: center;
   }
   
   .petCard {
@@ -102,4 +140,11 @@ html, body {
     width: 200px;
     height: 200px;
     border-radius: 30px;
+  }
+
+  @media (max-width: 768px) {
+    .petCardHolder {
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); /* Adjust columns for smaller screens */
+      gap: 10px; /* Adjust gap for smaller screens */
+    }
   }
