@@ -1,6 +1,6 @@
 import React from "react";
-import InputForm from "./InputForm";
-import PetCardHolder from "./PetCardHolder";
+import InputForm from "/Users/jakejohnson/Desktop/Codesmith/MeowMatch/client/components/InputForm.jsx";
+import PetCardHolder from "/Users/jakejohnson/Desktop/Codesmith/MeowMatch/client/components/PetCardHolder.jsx";
 
 function Body() {
   return (
