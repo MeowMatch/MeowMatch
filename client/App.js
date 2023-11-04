@@ -1,6 +1,6 @@
 import React from 'react';
-import NavBar from '/Users/jakejohnson/Desktop/Codesmith/MeowMatch/client/components/NavBar.jsx';
-import Body from '/Users/jakejohnson/Desktop/Codesmith/MeowMatch/client/components/Body.jsx';
+import NavBar from './components/NavBar.jsx';
+import Body from './components/Body.jsx';
 import './style.css';
 
 function App() {

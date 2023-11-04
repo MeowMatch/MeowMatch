@@ -1,5 +1,5 @@
 import React from 'react';
-import PetCard from '/Users/jakejohnson/Desktop/Codesmith/MeowMatch/client/components/PetCard.jsx';
+import PetCard from './PetCard.jsx';
 
 function PetCardHolder() {
   return (
