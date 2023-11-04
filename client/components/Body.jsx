@@ -1,6 +1,6 @@
-import React from 'react';
-import InputForm from './InputForm.jsx';
-import PetCardHolder from './PetCardHolder.jsx';
+import React from "react";
+import InputForm from "./InputForm.jsx";
+import PetCardHolder from "./PetCardHolder.jsx";
 
 function Body() {
   return (
