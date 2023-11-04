@@ -40,14 +40,22 @@ module.exports = {
         host: 'localhost',
         port: 8080,
         static: {
-            directory: path.resolve(__dirname, 'dist'),
-            publicPath: '/',
+          directory: path.join(__dirname, 'public'),
         },
+        open: true,
+        hot: true,
+        liveReload: true,
+        // compress: true,
+        headers: { 'Access-Control-Allow-Origin': '*' },
+
         proxy: {
-            '/api': 'http://localhost:3000'
+          '/api/**': {
+            target: 'http://localhost:3000/',
+            secure: false,
+          },
+
         },
-        historyApiFallback: true,
-    }
+     },
 }
 
 /**
