@@ -2,97 +2,96 @@ const models = require('../models/petModel');
 
 const petController = {};
 
+//get all pets for main page
 petController.getPets = async (req, res, next) => {
   try {
     res.locals.pets = await models.Pet.find();
     next();
   } catch (error) {
-    res.status(404).send('Error fetching pets');
+    console.error('Error getting pets: ', error);
+    next(error);
+    //res.status(404).send('Error fetching pets');
   }
 };
 
+//get specific pet by name
+petController.getPetByName = async (req, res, next) => {
+  try {
+    const selectedPet = req.params.name;
+    const pet = await models.Pet.findOne({ name: selectedPet });
+    if (pet) {
+      res.locals.petByName = { pet };
+      return next();
+    } else {
+      return next({
+        log: 'Error occurred within getPetByName middleware',
+        status: 404,
+        message: { err: 'No pet with this name found' },
+      });
+    }
+  } catch (error) {
+    console.error('Error getting pet: ', error);
+    next(error);
+  }
+};
+
+//add new pet to the registry
 petController.addPet = async (req, res, next) => {
   const { name, age, description } = req.body;
   try {
     res.locals.newPet = await models.Pet.create({name, age,description});
     next();
-    // res.status(201).json(newPet);
   } catch (error) {
     res.status(500).send('Error adding pet');
   }
 };
 
-// petController.updatePet = async (req, res) => {
-//     const { name, age, description } = req.params;
-//     const { newName, newAge, newDescription } = req.body;
-//     Pet.findOneAndUpdate(
-//         { name: name },
-//         { name: newName},
-//         { age: age },
-//         { age: newAge },
-//         { description: description },
-//         { description: newDescription },
-//         { new: true },
-//     )
-//         .then((updatedPet) => {
-//             if (!updatedPet) {
-//                 return next({
-//                     log: 'Error occurred within updateStudent middleware',
-//                     status: 404,
-//                     message: { err: 'No student with this name found' },
-//                   });
-//             }
-//             res.locals.updatedPet = { updatedPet };
-//             next();
-//         })
-//         .catch((error) => {
-//             console.log('An error occurred while updating your pet: ', error);
-//             next(error);
-//         })
-// }
-// petController.updatePet = async (req, res, next) => {
-//     try {
-//         const { name } = req.params;
-//         const { newName, newAge, newDescription } = req.body;
+//update a post/pet
+petController.updatePet = async (req, res, next) => {
+    try {
+        const { name } = req.params;
+        const { newName, newAge, newDescription, newUrl } = req.body;
+        const updateValues = {};
 
-//         // Define an object to store the new values you want to update
-//         const updateValues = {};
+        if (newName) {
+            updateValues.name = newName;
+        }
+        if (newAge) {
+            updateValues.age = newAge;
+        }
+        if (newDescription) {
+            updateValues.description = newDescription;
+        }
+        if (newUrl) {
+          updateValues.url = newUrl;
+        }
 
-//         if (newName) {
-//             updateValues.name = newName;
-//         }
+        const updatedPet = await models.Pet.findOneAndUpdate({ name: name }, updateValues, { new: true });
+        if (!updatedPet) {
+            return next({
+                log: 'Error occurred within updatePet middleware',
+                status: 404,
+                message: { err: 'No pet with this name found' },
+            });
+        }
+        res.locals.updatedPet = updatedPet;
+        next();
+    } catch (error) {
+        console.log('An error occurred while updating your pet: ', error);
+        next(error);
+    }
+};
 
-//         if (newAge) {
-//             updateValues.age = newAge;
-//         }
-
-//         if (newDescription) {
-//             updateValues.description = newDescription;
-//         }
-
-//         // Use async/await with try/catch for better error handling
-//         const updatedPet = await Pet.findOneAndUpdate({ name: name }, updateValues, { new: true });
-
-//         if (!updatedPet) {
-//             return next({
-//                 log: 'Error occurred within updatePet middleware',
-//                 status: 404,
-//                 message: { err: 'No pet with this name found' },
-//             });
-//         }
-
-//         res.locals.updatedPet = updatedPet; // No need to wrap it in an object
-
-//         next();
-//     } catch (error) {
-//         console.log('An error occurred while updating your pet: ', error);
-//         next(error);
-//     }
-// };
-
-
-// petController.deletePet = async (req, res) = {
-
-// }
+//delete pet from registry
+petController.deletePet = async (req, res, next) => {
+  try {
+  const deletedPet = req.params.name;
+  await models.Pet.findOneAndDelete({ name: deletedPet });
+  next();
+  } catch (error) {
+    console.error('Error deleting pet: ', error);
+    next(error);
+  }
+};
 
 module.exports = petController;
