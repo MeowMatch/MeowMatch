@@ -1,15 +1,19 @@
-import React from 'react';
-import NavBar from './components/NavBar.jsx';
-import Body from './components/Body.jsx';
-import './style.css';
+import React from "react";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import Login from "./Login.js";
+import Pets from "./Pets.js";
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <NavBar />
-      <Body />
-    </div>
+    <Router>
+      <div>
+        <Switch>
+          <Route exact path="/" component={Login} />
+          <Route exact path="/pets" component={Pets} />
+        </Switch>
+      </div>
+    </Router>
   );
-}
+};
 
 export default App;
