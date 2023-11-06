@@ -1,6 +1,10 @@
 import React from 'react';
 
-function PetCard({ name, age, description, url }) {
+function PetCard({ name, age, description, url, onDelete, id, setPetData }) {
+  const handleDelete = () => {
+    onDelete(id);
+  };
+
   return (
     <div className="petCard">
       <img src={url} alt={name} className="petImage" />
@@ -9,6 +13,9 @@ function PetCard({ name, age, description, url }) {
         <p>Age: {age}</p>
         <p>{description}</p>
       </div>
+      <button className="deleteButton" onClick={handleDelete}>
+        Delete
+      </button>
     </div>
   );
 }

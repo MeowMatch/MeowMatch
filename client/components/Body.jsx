@@ -31,7 +31,7 @@ function Body() {
         <InputForm refreshPetData={fetchPetData} />
       </div>
       <div className="pet-card-holder-container">
-        <PetCardHolder petData={petData} />
+        <PetCardHolder petData={petData} setPetData={setPetData} />
       </div>
     </div>
   );
