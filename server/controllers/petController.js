@@ -12,9 +12,9 @@ petController.getPets = async (req, res) => {
 };
 
 petController.addPet = async (req, res) => {
-  const { name, age, description } = req.body;
+  const { name, age, description, url } = req.body;
   try {
-    const newPet = await models.Pet.create({name, age,description});
+    const newPet = await models.Pet.create({ name, age, description, url });
     res.status(201).json(newPet);
   } catch (error) {
     res.status(500).send('Error adding pet');
