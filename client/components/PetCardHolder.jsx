@@ -1,8 +1,19 @@
 import React from 'react';
 import PetCard from './PetCard.jsx';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+//import axios from 'axios';
 
-function PetCardHolder({ petData, setPetData }) {
+function PetCardHolder({ petData, setPetData }) { 
+
+  const [pets, setPets] = useState([]);
+
+  const handleUpdate = (updatedPet) => {
+    setPets((prevPets) => {
+      return prevPets.map((pet) => 
+      pet._id === updatedPet._id ? updatedPet : pet
+      );
+    });
+  };
 
   useEffect(() => {
     fetch('http://localhost:3000/pets')
@@ -25,10 +36,12 @@ function PetCardHolder({ petData, setPetData }) {
       {petData.map((pet) => (
         <PetCard
           key={pet._id}
+          _id={pet._id}
           name={pet.name}
           age={pet.age}
           description={pet.description}
           url={pet.url}
+          onUpdate={handleUpdate}
         />
       ))}
     </div>

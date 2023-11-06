@@ -10,16 +10,10 @@ petController.getPets = async (req, res, next) => {
   } catch (error) {
     console.error('Error getting pets: ', error);
     next(error);
-    //res.status(404).send('Error fetching pets');
   }
 };
 
-// petController.addPet = async (req, res) => {
-//   const { name, age, description, url } = req.body;
-//   try {
-//     const newPet = await models.Pet.create({ name, age, description, url });
-//     res.status(201).json(newPet);
-//get specific pet by name
+//get pet by name
 petController.getPetByName = async (req, res, next) => {
   try {
     const selectedPet = req.params.name;
@@ -59,7 +53,7 @@ petController.addPet = async (req, res, next) => {
 //update a post/pet
 petController.updatePet = async (req, res, next) => {
   try {
-    const { name } = req.params;
+    const { _id } = req.params;
     const { newName, newAge, newDescription, newUrl } = req.body;
     const updateValues = {};
 
@@ -77,7 +71,7 @@ petController.updatePet = async (req, res, next) => {
     }
 
     const updatedPet = await models.Pet.findOneAndUpdate(
-      { name: name },
+      { _id: _id },
       updateValues,
       { new: true }
     );
@@ -99,8 +93,8 @@ petController.updatePet = async (req, res, next) => {
 //delete pet from registry
 petController.deletePet = async (req, res, next) => {
   try {
-    const deletedPet = req.params.name;
-    await models.Pet.findOneAndDelete({ name: deletedPet });
+    const deletedPet = req.params._id;
+    await models.Pet.findOneAndDelete({ _id: deletedPet });
     next();
   } catch (error) {
     console.error('Error deleting pet: ', error);

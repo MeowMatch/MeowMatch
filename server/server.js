@@ -34,9 +34,8 @@ app.use(express.static(path.join(__dirname, '../client/public')));
 app.use('/', router);
 
 // Route handler to respond with main app
-app.get('*', (req, res) => {
+app.get('/*', (req, res) => {
   res.status(200).sendFile(path.join(__dirname, '../client/public/index.html'));
-  // res.status(200).send(pets));
 });
 
 // CATCH-ALL ROUTE HANDLER
@@ -58,11 +57,3 @@ app.use((err, req, res, next) => {
 app.listen(PORT, () => {
   console.log(`Server listening on port: ${PORT}`);
 });
-
-
-// "scripts": {
-//   "test": "echo \"Error: no test specified\" && exit 1",
-//   "start": "webpack-dev-server",
-//   "build": "webpack",
-//   "dev": "concurrently \"cross-env NODE_ENV=development webpack-dev-server --open --hot --progress --color \" \"nodemon ./server/server.js\""
-// }
