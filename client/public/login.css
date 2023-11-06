@@ -5,7 +5,8 @@
   height: 100vh;
   background-color: #f0cdf1;
   font-family: 'Lobster';
-  color: #27296d
+  color: #27296d;
+  /* background-color: aquamarine; */
 }
 
 .login-form {

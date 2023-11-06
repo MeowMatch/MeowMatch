@@ -6,6 +6,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   background-image: url('./images/meowmatchbg.jpeg');
   background-size: cover;
+  /* background-color: blue; */
 }
 
 .navbar {
