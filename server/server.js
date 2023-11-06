@@ -19,14 +19,14 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use(
-  '/style.css',
-  express.static(path.join(__dirname, '../client/style.css'))
-);
-app.use(
-  '/login.css',
-  express.static(path.join(__dirname, '../client/login.css'))
-);
+// app.use(
+//   '/style.css',
+//   express.static(path.join(__dirname, '../client/public/style.css'))
+// );
+// app.use(
+//   '/login.css',
+//   express.static(path.join(__dirname, '../client/login.css'))
+// );
 
 app.use(express.static(path.join(__dirname, '../client/public')));
 
