@@ -28,6 +28,14 @@
     "webpack-cli": "^5.1.4",
     "webpack-dev-server": "^4.15.1"
   },
+<<<<<<< HEAD
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "webpack-dev-server",
+    "build": "webpack",
+    "dev": "concurrently \"cross-env NODE_ENV=development webpack-dev-server --open --hot --progress --color \" \"nodemon ./server/server.js\""
+  }
+=======
 
 "scripts": {
   "test": "echo \"Error: no test specified\" && exit 1",
@@ -35,4 +43,5 @@
   "build": "webpack",
   "dev": "concurrently \"cross-env NODE_ENV=development webpack-dev-server --open --hot --progress --color \" \"nodemon ./server/server.js\""
 }
+>>>>>>> dev
 }

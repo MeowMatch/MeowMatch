@@ -5,8 +5,13 @@ const petController = {};
 //get all pets for main page
 petController.getPets = async (req, res, next) => {
   try {
+<<<<<<< HEAD
+    const pets = await models.Pet.find({});
+    res.status(200).json(pets);
+=======
     res.locals.pets = await models.Pet.find();
     next();
+>>>>>>> dev
   } catch (error) {
     console.error('Error getting pets: ', error);
     next(error);
