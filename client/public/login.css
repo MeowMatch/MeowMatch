@@ -6,7 +6,6 @@
   background-color: #f0cdf1;
   font-family: 'Lobster';
   color: #27296d;
-  /* background-color: aquamarine; */
 }
 
 .login-form {
@@ -33,5 +32,10 @@ button {
   border-radius: 5px;
   background-color: #5e63b6;
   color: #ffffff;
+}
+
+button:hover {
   cursor: pointer;
+  box-shadow: 0 5px 5px 0 rgba(0,0,0,0.24), 0 5px 5px 0 rgba(0,0,0,0.19);
+  background-color: #5e62b6b4;
 }
