@@ -141,11 +141,15 @@ html, body {
     justify-content: center;
   }
   
-  .petCard {
+  .petCardContainer {
     background-color: rgba(248, 200, 233, 0.344);
     width: 200px;
     height: 200px;
     border-radius: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
   }
 
   @media (max-width: 768px) {
@@ -155,13 +159,13 @@ html, body {
     }
   }
 
-  @keyframes colorShift1 {
+  /* @keyframes colorShift1 {
     0%   {color: #575151;}
     25%  {color: #858484;}
     50%  {color: #ffffff;}
     75%  {color: #858484;}
     100% {color: #575151;}
-  }
+  } */
 
   /* @keyframes colorShift2 {
     0%   {color: #ffffff;}

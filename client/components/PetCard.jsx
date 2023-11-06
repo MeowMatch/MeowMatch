@@ -20,7 +20,6 @@ function PetCard({ name, age, description, url }) {
         <p>Age: {age}</p>
         <p>{description}</p>
       </div> 
-
     </div>
   );
 }

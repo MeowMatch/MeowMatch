@@ -22,7 +22,7 @@ function PetCardHolder() {
   }, []);
 
   return (
-    <div className="petCard">
+    <div className="petCardContainer">
       {petData.map((pet) => (
         <PetCard
           key={pet._id}
