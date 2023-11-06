@@ -25,6 +25,7 @@ app.use('/', router);
 // Route handler to respond with main app
 app.get('/', (req, res) => {
   res.status(200).sendFile(path.join(__dirname, '../client/public/index.html'));
+  // res.status(200).send(pets));
 });
 
 // CATCH-ALL ROUTE HANDLER
@@ -39,10 +40,18 @@ app.use((err, req, res, next) => {
   };
   const errorObj = Object.assign(defaultErr, err);
   console.log(errorObj.log);
-
   return res.status(errorObj.status).send(errorObj.message);
 });
 
+//make sure we're connecting to the correct port!
 app.listen(PORT, () => {
   console.log(`Server listening on port: ${PORT}`);
 });
+
+
+// "scripts": {
+//   "test": "echo \"Error: no test specified\" && exit 1",
+//   "start": "webpack-dev-server",
+//   "build": "webpack",
+//   "dev": "concurrently \"cross-env NODE_ENV=development webpack-dev-server --open --hot --progress --color \" \"nodemon ./server/server.js\""
+// }
