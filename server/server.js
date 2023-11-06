@@ -47,3 +47,11 @@ app.use((err, req, res, next) => {
 app.listen(PORT, () => {
   console.log(`Server listening on port: ${PORT}`);
 });
+
+
+// "scripts": {
+//   "test": "echo \"Error: no test specified\" && exit 1",
+//   "start": "webpack-dev-server",
+//   "build": "webpack",
+//   "dev": "concurrently \"cross-env NODE_ENV=development webpack-dev-server --open --hot --progress --color \" \"nodemon ./server/server.js\""
+// }

@@ -2,20 +2,21 @@ const models = require('../models/petModel');
 
 const petController = {};
 
-petController.getPets = async (req, res) => {
+petController.getPets = async (req, res, next) => {
   try {
-    const pets = await models.Pet.find();
-    res.status(200).json(pets);
+    res.locals.pets = await models.Pet.find();
+    next();
   } catch (error) {
     res.status(404).send('Error fetching pets');
   }
 };
 
-petController.addPet = async (req, res) => {
+petController.addPet = async (req, res, next) => {
   const { name, age, description } = req.body;
   try {
-    const newPet = await models.Pet.create({name, age,description});
-    res.status(201).json(newPet);
+    res.locals.newPet = await models.Pet.create({name, age,description});
+    next();
+    // res.status(201).json(newPet);
   } catch (error) {
     res.status(500).send('Error adding pet');
   }
@@ -49,45 +50,45 @@ petController.addPet = async (req, res) => {
 //             next(error);
 //         })
 // }
-petController.updatePet = async (req, res, next) => {
-    try {
-        const { name } = req.params;
-        const { newName, newAge, newDescription } = req.body;
+// petController.updatePet = async (req, res, next) => {
+//     try {
+//         const { name } = req.params;
+//         const { newName, newAge, newDescription } = req.body;
 
-        // Define an object to store the new values you want to update
-        const updateValues = {};
+//         // Define an object to store the new values you want to update
+//         const updateValues = {};
 
-        if (newName) {
-            updateValues.name = newName;
-        }
+//         if (newName) {
+//             updateValues.name = newName;
+//         }
 
-        if (newAge) {
-            updateValues.age = newAge;
-        }
+//         if (newAge) {
+//             updateValues.age = newAge;
+//         }
 
-        if (newDescription) {
-            updateValues.description = newDescription;
-        }
+//         if (newDescription) {
+//             updateValues.description = newDescription;
+//         }
 
-        // Use async/await with try/catch for better error handling
-        const updatedPet = await Pet.findOneAndUpdate({ name: name }, updateValues, { new: true });
+//         // Use async/await with try/catch for better error handling
+//         const updatedPet = await Pet.findOneAndUpdate({ name: name }, updateValues, { new: true });
 
-        if (!updatedPet) {
-            return next({
-                log: 'Error occurred within updatePet middleware',
-                status: 404,
-                message: { err: 'No pet with this name found' },
-            });
-        }
+//         if (!updatedPet) {
+//             return next({
+//                 log: 'Error occurred within updatePet middleware',
+//                 status: 404,
+//                 message: { err: 'No pet with this name found' },
+//             });
+//         }
 
-        res.locals.updatedPet = updatedPet; // No need to wrap it in an object
+//         res.locals.updatedPet = updatedPet; // No need to wrap it in an object
 
-        next();
-    } catch (error) {
-        console.log('An error occurred while updating your pet: ', error);
-        next(error);
-    }
-};
+//         next();
+//     } catch (error) {
+//         console.log('An error occurred while updating your pet: ', error);
+//         next(error);
+//     }
+// };
 
 
 // petController.deletePet = async (req, res) = {
