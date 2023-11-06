@@ -1,9 +1,8 @@
 import React from 'react';
 import PetCard from './PetCard.jsx';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 
-function PetCardHolder() {
-  const [petData, setPetData] = useState([]);
+function PetCardHolder({ petData, setPetData }) {
 
   useEffect(() => {
     fetch('http://localhost:3000/pets')
@@ -19,7 +18,7 @@ function PetCardHolder() {
       .catch((error) => {
         console.error('There was a problem with the fetch operation:', error);
       });
-  }, []);
+  }, [setPetData]);
 
   return (
     <div className="petCardContainer">

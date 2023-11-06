@@ -10,13 +10,11 @@ mongoose
 
 const Schema = mongoose.Schema;
 
-const petSchema = new Schema({
-  name: String,
-  age: Number,
-  description: String,
-  url: String,
+const userSchema = new Schema({
+  username: { type: String, required: true },
+  password: { type: String, required: true },
 });
 
-const Pet = mongoose.model('Pet', petSchema);
+const User = mongoose.model('User', userSchema);
 
-module.exports = { Pet };
+module.exports = { User };
