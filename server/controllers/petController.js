@@ -4,7 +4,7 @@ const petController = {};
 
 petController.getPets = async (req, res) => {
   try {
-    const pets = await models.Pet.find();
+    const pets = await models.Pet.find({});
     res.status(200).json(pets);
   } catch (error) {
     res.status(404).send('Error fetching pets');
