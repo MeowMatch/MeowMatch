@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import meow from '../public/soundfx/meow.mp3'
 
 function InputForm({ refreshPetData }) {
   const [name, setName] = useState('');
@@ -6,8 +7,13 @@ function InputForm({ refreshPetData }) {
   const [description, setDescription] = useState('');
   const [url, setUrl] = useState('');
 
+  function submitSound(){
+    new Audio(meow).play();
+  }
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+    submitSound();
 
     try {
       await fetch('http://localhost:3000/pets', {
