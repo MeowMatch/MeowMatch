@@ -160,15 +160,15 @@ html, body {
     }
   }
 
-  /* @keyframes colorShift1 {
+  @keyframes colorShift1 {
     0%   {color: #575151;}
     25%  {color: #858484;}
     50%  {color: #ffffff;}
     75%  {color: #858484;}
     100% {color: #575151;}
-  } */
+  }
 
-  /* @keyframes colorShift2 {
+  @keyframes colorShift2 {
     0%   {color: #ffffff;}
     25%  {color: #858484;}
     50%  {color: #575151;}
@@ -186,4 +186,4 @@ html, body {
     animation-name: colorShift2;
     animation-duration: 12s;
     animation-iteration-count: infinite;
-  } */
+  }
