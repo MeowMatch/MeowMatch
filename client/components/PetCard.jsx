@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 
 function PetCard({ name, age, description, url, onDelete, id, setPetData }) {
@@ -50,6 +49,14 @@ function PetCard({ name, age, description, url, onDelete, id, setPetData }) {
     }
   };
 
+  const handleCancelEdit = () => {
+    setIsEditMode(false);
+    setNewName('');
+    setNewAge('');
+    setNewDescription('');
+    setNewUrl('');
+  };
+
   const handleDelete = () => {
     onDelete(id);
   };
@@ -94,7 +101,10 @@ function PetCard({ name, age, description, url, onDelete, id, setPetData }) {
         )}
       </div>
       {isEditMode ? (
-        <button onClick={handleUpdate}>Update</button>
+        <>
+          <button onClick={handleUpdate}>Update</button>
+          <button onClick={handleCancelEdit}>Cancel</button>
+        </>
       ) : (
         <button onClick={() => setIsEditMode(true)}>Edit</button>
       )}
