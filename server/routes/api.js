@@ -11,4 +11,6 @@ router.delete('/pets/:id', petController.deletePet);
 
 router.post('/login', userController.login);
 
+router.patch('/pets/:id', petController.updatePet); 
+
 module.exports = router;

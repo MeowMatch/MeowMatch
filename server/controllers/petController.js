@@ -34,7 +34,6 @@ petController.deletePet = async (req, res) => {
   }
 };
 
-
 // petController.deletePet = async (req, res) => {
 //   const { name } = req.params;
 //   try {
@@ -44,5 +43,26 @@ petController.deletePet = async (req, res) => {
 //     res.status(500).send(`Error deleting pet ${name}`);
 //   }
 // };
+
+petController.updatePet = async (req, res) => {
+  const { id } = req.params;
+  const { name, age, description, url } = req.body;
+
+  try {
+    const updatedPet = await models.Pet.findByIdAndUpdate(
+      id,
+      { name, age, description, url },
+      { new: true } // To return the updated record
+    );
+
+    if (!updatedPet) {
+      return res.status(404).json({ message: `Pet with ID ${id} not found` });
+    }
+
+    res.status(200).json({ message: `Pet with ID ${id} updated successfully`, updatedPet });
+  } catch (error) {
+    res.status(500).send(`Error updating pet with ID ${id}`);
+  }
+};
 
 module.exports = petController;
