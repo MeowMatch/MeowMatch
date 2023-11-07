@@ -2,11 +2,10 @@ const models = require('../models/petModel');
 
 const petController = {};
 
-//get all pets for main page
-petController.getPets = async (req, res, next) => {
+petController.getPets = async (req, res) => {
   try {
-    res.locals.pets = await models.Pet.find();
-    next();
+    const pets = await models.Pet.find();
+    res.status(200).json(pets);
   } catch (error) {
     console.error('Error getting pets: ', error);
     next(error);
@@ -38,13 +37,8 @@ petController.getPetByName = async (req, res, next) => {
 petController.addPet = async (req, res, next) => {
   const { name, age, description, url } = req.body;
   try {
-    res.locals.newPet = await models.Pet.create({
-      name,
-      age,
-      description,
-      url,
-    });
-    next();
+    const newPet = await models.Pet.create({ name, age, description, url });
+    res.status(201).json(newPet);
   } catch (error) {
     res.status(500).send('Error adding pet');
   }
@@ -53,7 +47,7 @@ petController.addPet = async (req, res, next) => {
 //update a post/pet
 petController.updatePet = async (req, res, next) => {
   try {
-    const { _id } = req.params;
+    const { name } = req.params;
     const { newName, newAge, newDescription, newUrl } = req.body;
     const updateValues = {};
 
@@ -71,7 +65,7 @@ petController.updatePet = async (req, res, next) => {
     }
 
     const updatedPet = await models.Pet.findOneAndUpdate(
-      { _id: _id },
+      { name: name },
       updateValues,
       { new: true }
     );
@@ -82,13 +76,12 @@ petController.updatePet = async (req, res, next) => {
         message: { err: 'No pet with this name found' },
       });
     }
-    res.locals.updatedPet = updatedPet;
-    next();
+    res.status(200).json({ message: `Pet with ID ${id} deleted successfully` });
   } catch (error) {
-    console.log('An error occurred while updating your pet: ', error);
-    next(error);
+    res.status(500).send(`Error deleting pet with ID ${id}`);
   }
 };
+
 
 //delete pet from registry
 petController.deletePet = async (req, res, next) => {
