@@ -18,6 +18,7 @@ const Login = () => {
         body: JSON.stringify({ username, password }),
       });
       if (response.ok) {
+        sessionStorage.setItem('userAuthenticated', 'true');//
         history.push('/pets');
       } else {
         setError('Invalid username or password');
