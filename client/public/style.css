@@ -329,8 +329,8 @@ textarea::placeholder {
   display: flex;
   flex-direction: column;
   align-items: center;
-  min-width: 246px;
-  min-height: 246px;
+  min-width: 240px;
+  min-height: 240px;
   border-style: outset;
   border-width: 4px;
   border-color: rgba(248, 200, 233, 0.442);

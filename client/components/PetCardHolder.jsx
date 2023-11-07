@@ -1,22 +1,11 @@
 import React, { useEffect } from 'react';
 import PetCard from './PetCard.jsx';
-import { useEffect, useState } from 'react';
-//import axios from 'axios';
 
-function PetCardHolder({ petData, setPetData }) { 
-
-  const [pets, setPets] = useState([]);
-
-  const handleUpdate = (updatedPet) => {
-    setPets((prevPets) => {
-      return prevPets.map((pet) => 
-      pet._id === updatedPet._id ? updatedPet : pet
-      );
-    });
-  };
-
-  useEffect(() => {
-    fetch('http://localhost:3000/pets')
+function PetCardHolder({ petData, setPetData }) {
+  const deletePet = (_id) => {
+    fetch(`http://localhost:3000/pets/${_id}`, {
+      method: 'DELETE',
+    })
       .then((response) => {
         if (!response.ok) {
           throw new Error('Error: Could not delete pet');
@@ -24,12 +13,12 @@ function PetCardHolder({ petData, setPetData }) {
         return response.json();
       })
       .then(() => {
-        setPetData((prevData) => prevData.filter((pet) => pet._id !== _id)); 
+        setPetData((prevData) => prevData.filter((pet) => pet._id !== _id));
       })
       .catch((error) => {
         console.error('There was a problem with the delete operation:', error);
       });
-  });
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -53,12 +42,13 @@ function PetCardHolder({ petData, setPetData }) {
       {petData.map((pet) => (
         <PetCard
           key={pet._id}
-          _id={pet._id}
           name={pet.name}
           age={pet.age}
           description={pet.description}
           url={pet.url}
-          onUpdate={handleUpdate}
+          id={pet._id}
+          setPetData={setPetData}
+          onDelete={deletePet}
         />
       ))}
     </div>
