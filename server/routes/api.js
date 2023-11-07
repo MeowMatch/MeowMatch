@@ -9,8 +9,8 @@ router.post('/pets', petController.addPet);
 
 router.delete('/pets/:id', petController.deletePet);
 
-router.post('/login', userController.login);
-
 router.patch('/pets/:id', petController.updatePet); 
+
+router.post('/login', userController.login);
 
 module.exports = router;
