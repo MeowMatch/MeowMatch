@@ -52,7 +52,17 @@ function PetCard({ name, age, description, url, onDelete, id, setPetData }) {
 
       setIsEditMode(false);
       setPetData((prevData) => {
-        return prevData.map((pet) => (pet._id === id ? { ...pet, name: newName, age: newAge, description: newDescription, url: newUrl } : pet));
+        return prevData.map((pet) =>
+          pet._id === id
+            ? {
+                ...pet,
+                name: newName,
+                age: newAge,
+                description: newDescription,
+                url: newUrl,
+              }
+            : pet
+        );
       });
       setNewName('');
       setNewAge('');
@@ -73,10 +83,30 @@ function PetCard({ name, age, description, url, onDelete, id, setPetData }) {
       <div className="petDetails">
         {isEditMode ? (
           <>
-            <input type="text" value={newName} onChange={(e) => setNewName(e.target.value)} />
-            <input type="text" value={newAge} onChange={(e) => setNewAge(e.target.value)} />
-            <input type="text" value={newDescription} onChange={(e) => setNewDescription(e.target.value)} />
-            <input type="text" value={newUrl} onChange={(e) => setNewUrl(e.target.value)} />
+            <input
+              type="text"
+              placeholder="Name"
+              value={newName}
+              onChange={(e) => setNewName(e.target.value)}
+            />
+            <input
+              type="text"
+              placeholder="Age"
+              value={newAge}
+              onChange={(e) => setNewAge(e.target.value)}
+            />
+            <input
+              type="text"
+              placeholder="Description"
+              value={newDescription}
+              onChange={(e) => setNewDescription(e.target.value)}
+            />
+            <input
+              type="text"
+              placeholder="URL"
+              value={newUrl}
+              onChange={(e) => setNewUrl(e.target.value)}
+            />
           </>
         ) : (
           <>
