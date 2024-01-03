@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose, { Document, Schema, Model } from 'mongoose';
 
 const MONGO_URI =
   'mongodb+srv://meowmatch:letmein123@cluster0.2ullxmv.mongodb.net/?retryWrites=true&w=majority';
@@ -8,13 +8,18 @@ mongoose
   .then(() => console.log('Connect to Mongo DB.'))
   .catch((err) => console.log(err));
 
-const Schema = mongoose.Schema;
+export interface IUser extends Document {
+  username: string;
+  password: string;
+}
 
-const userSchema = new Schema({
+const userSchema = new Schema<IUser>({
   username: { type: String, required: true },
   password: { type: String, required: true },
 });
 
-const User = mongoose.model('User', userSchema);
+const User: Model<IUser> = mongoose.model('User', userSchema);
 
-module.exports = { User };
+export { User, IUser as UserInterface};
+
+

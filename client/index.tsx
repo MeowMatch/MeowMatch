@@ -3,8 +3,14 @@ import { BrowserRouter } from 'react-router-dom';
 import { createRoot } from 'react-dom/client';
 import App from './App';
 
-createRoot(document.getElementById('root')).render(
+const rootElement = document.getElementById('root');
+
+if (rootElement) {
+  createRoot(rootElement).render(
     <BrowserRouter>
       <App />
     </BrowserRouter>
-);
+  );
+} else {
+  console.error('Root element is not found in the document');
+}

@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import InputForm from './InputForm.jsx';
-import PetCardHolder from './PetCardHolder.jsx';
+import InputForm from './InputForm';
+import PetCardHolder from './PetCardHolder';
+import { Pet } from '../types/pet.types'
 
-function Body() {
-  const [petData, setPetData] = useState([]);
+const Body: React.FC = () => {
+  const [petData, setPetData] = useState<Pet[]>([]);
 
   useEffect(() => {
     fetchPetData();
@@ -17,7 +18,7 @@ function Body() {
         }
         return response.json();
       })
-      .then((data) => {
+      .then((data: Pet[]) => {
         setPetData(data);
       })
       .catch((error) => {
