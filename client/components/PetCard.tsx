@@ -1,35 +1,21 @@
-// import React from 'react';
-
-// function PetCard({ name, age, description, url, onDelete, id, setPetData }) {
-//   const handleDelete = () => {
-//     onDelete(id);
-//   };
-
-//   return (
-//     <div className="petCard">
-//       <img src={url} alt={name} className="petImage" />
-//       <div className="petDetails">
-//         <strong>{name}</strong>
-//         <p>Age: {age}</p>
-//         <p>{description}</p>
-//       </div>
-//       <button className="deleteButton" onClick={handleDelete}>
-//         Delete
-//       </button>
-//     </div>
-//   );
-// }
-
-// export default PetCard;
-
 import React, { useState } from 'react';
 
-function PetCard({ name, age, description, url, onDelete, id, setPetData }) {
-  const [newName, setNewName] = useState('');
-  const [newAge, setNewAge] = useState('');
-  const [newDescription, setNewDescription] = useState('');
-  const [newUrl, setNewUrl] = useState('');
-  const [isEditMode, setIsEditMode] = useState(false);
+interface PetCardProps {
+  name: string;
+  age: number;
+  description: string;
+  url: string;
+  onDelete: (id: string) => void;
+  id: string;
+  setPetData: React.Dispatch<React.SetStateAction<any[]>> 
+}
+
+const PetCard: React.FC<PetCardProps> = ({ name, age, description, url, onDelete, id, setPetData }) => {
+  const [newName, setNewName] = useState<string>('');
+  const [newAge, setNewAge] = useState<number>(0);
+  const [newDescription, setNewDescription] = useState<string>('');
+  const [newUrl, setNewUrl] = useState<string>('');
+  const [isEditMode, setIsEditMode] = useState<boolean>(false);
 
   const handleUpdate = async () => {
     try {
@@ -65,7 +51,7 @@ function PetCard({ name, age, description, url, onDelete, id, setPetData }) {
         );
       });
       setNewName('');
-      setNewAge('');
+      setNewAge(0);
       setNewDescription('');
       setNewUrl('');
     } catch (error) {
@@ -76,7 +62,7 @@ function PetCard({ name, age, description, url, onDelete, id, setPetData }) {
   const handleCancelEdit = () => {
     setIsEditMode(false);
     setNewName('');
-    setNewAge('');
+    setNewAge(0);
     setNewDescription('');
     setNewUrl('');
   };
@@ -98,10 +84,10 @@ function PetCard({ name, age, description, url, onDelete, id, setPetData }) {
               onChange={(e) => setNewName(e.target.value)}
             />
             <input
-              type="text"
+              type="number"
               placeholder="Age"
               value={newAge}
-              onChange={(e) => setNewAge(e.target.value)}
+              onChange={(e) => setNewAge(Number(e.target.value))}
             />
             <input
               type="text"
@@ -130,11 +116,13 @@ function PetCard({ name, age, description, url, onDelete, id, setPetData }) {
           <button onClick={handleCancelEdit}>Cancel</button>
         </>
       ) : (
-        <button onClick={() => setIsEditMode(true)}>Edit</button>
+        <>
+          <button onClick={() => setIsEditMode(true)}>Edit</button>
+          <button className="deleteButton" onClick={handleDelete}>
+            Delete
+          </button>
+        </>
       )}
-      <button className="deleteButton" onClick={handleDelete}>
-        Delete
-      </button>
     </div>
   );
 }

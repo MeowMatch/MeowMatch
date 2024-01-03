@@ -1,9 +1,9 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import Login from "./Login.js";
-import Pets from "./Pets.js";
+import Login from "./Login";
+import Pets from "./Pets";
 
-const App = () => {
+const App: React.FC = () => {
   return (
     <Router>
       <div>

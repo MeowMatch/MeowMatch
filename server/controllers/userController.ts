@@ -1,12 +1,11 @@
-const models = require('../models/userModel');
+import { Request, Response } from 'express'
+import { User } from '../models/userModel'
 
-const userController = {};
-
-userController.login = async (req, res) => {
+export const login: (req: Request, res: Response) => Promise<void> = async (req, res) => {
   const { username, password } = req.body;
-
+  
   try {
-    const user = await models.User.findOne({ username, password }).exec();
+    const user = await User.findOne({ username, password }).exec();
 
     if (user) {
       res.redirect('http://localhost:3000/pets');
@@ -17,6 +16,5 @@ userController.login = async (req, res) => {
     console.error('Error during login:', error);
     res.status(500).json({ error: 'Server error during login' });
   }
-};
+}
 
-module.exports = userController;

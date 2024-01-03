@@ -1,6 +1,6 @@
 import React from 'react';
 
-function NavBar() {
+const NavBar : React.FC = () => {
   return (
     <div className="navbar">
       <i className="fa fa-paw"></i> <label className="title1"> Meow</label>

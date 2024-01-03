@@ -1,8 +1,8 @@
+import { Request, Response } from 'express';
+
 const models = require('../models/petModel');
 
-const petController = {};
-
-petController.getPets = async (req, res) => {
+export const getPets: (req: Request, res: Response) => Promise<void> = async (req, res) => {
   try {
     const pets = await models.Pet.find();
     res.status(200).json(pets);
@@ -11,7 +11,7 @@ petController.getPets = async (req, res) => {
   }
 };
 
-petController.addPet = async (req, res) => {
+export const addPet: (req: Request, res: Response) => Promise<void> = async (req, res) => {
   const { name, age, description, url } = req.body;
   try {
     const newPet = await models.Pet.create({ name, age, description, url });
@@ -21,8 +21,8 @@ petController.addPet = async (req, res) => {
   }
 };
 
-petController.deletePet = async (req, res) => {
-  const { id } = req.params; 
+export const deletePet: (req: Request, res: Response) => Promise<Response<any, Record<string, any>> | void> = async (req, res) => {
+  const { id } = req.params;
   try {
     const deletedPet = await models.Pet.findByIdAndDelete(id);
     if (!deletedPet) {
@@ -34,17 +34,7 @@ petController.deletePet = async (req, res) => {
   }
 };
 
-// petController.deletePet = async (req, res) => {
-//   const { name } = req.params;
-//   try {
-//     await models.Pet.deleteOne({ name }); 
-//     res.status(200).json({ message: `Pet ${name} deleted successfully` });
-//   } catch (error) {
-//     res.status(500).send(`Error deleting pet ${name}`);
-//   }
-// };
-
-petController.updatePet = async (req, res) => {
+export const updatePet: (req: Request, res: Response) => Promise<Response<any, Record<string, any>> | void> = async (req, res) => {
   const { id } = req.params;
   const { name, age, description, url } = req.body;
 
@@ -64,5 +54,3 @@ petController.updatePet = async (req, res) => {
     res.status(500).send(`Error updating pet with ID ${id}`);
   }
 };
-
-module.exports = petController;

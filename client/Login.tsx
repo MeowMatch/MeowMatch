@@ -1,14 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, ChangeEvent, FormEvent } from 'react';
 import { useHistory } from 'react-router-dom';
-import './public/login.css';
+// import './public/login.css';
+import './login.css';
 
-const Login = () => {
+const Login: React.FC = () => {
   const history = useHistory();
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState(null)
+  const [username, setUsername] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
+  const [error, setError] = useState<string | null>(null);
 
-  const handleLogin = async () => {
+  const handleLogin = async (): Promise<void> => {
     try {
       const response = await fetch('http://localhost:3000/login', {
         method: 'POST',
@@ -18,6 +19,7 @@ const Login = () => {
         body: JSON.stringify({ username, password }),
       });
       if (response.ok) {
+        sessionStorage.setItem('userAuthenticated', 'true');
         history.push('/pets');
       } else {
         setError('Invalid username or password');
@@ -28,28 +30,33 @@ const Login = () => {
   };
 
   return (
-      <div className="login-container">
-        
+    <div className="login-container">
       <form
         className="login-form"
-        onSubmit={(e) => {
+        onSubmit={(e: FormEvent) => {
           e.preventDefault();
           handleLogin();
         }}
       >
-        <h2><i class="fa fa-paw"></i> Meowmatch <i class="fa fa-paw"></i></h2>
+        <h2>
+          <i className="fa fa-paw"></i> Meowmatch <i className="fa fa-paw"></i>
+        </h2>
         {error && <p>{error}</p>}
         <input
           type="text"
           placeholder="Username"
           value={username}
-          onChange={(e) => setUsername(e.target.value)}
+          onChange={(e: ChangeEvent<HTMLInputElement>) =>
+            setUsername(e.target.value)
+          }
         />
         <input
           type="password"
           placeholder="Password"
           value={password}
-          onChange={(e) => setPassword(e.target.value)}
+          onChange={(e: ChangeEvent<HTMLInputElement>) =>
+            setPassword(e.target.value)
+          }
         />
         <button type="submit">Login</button>
       </form>

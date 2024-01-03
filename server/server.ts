@@ -1,17 +1,10 @@
-const path = require('path');
-const express = require('express');
-const router = require('./routes/api');
-const cors = require('cors');
+import path from 'path';
+import express, { Express, Request, Response, NextFunction } from 'express';
+import apiRouter from './routes/api';
+import cors from 'cors';
 
-const app = express();
-const PORT = 3000;
-
-// const multer = require('multer');
-// const upload = multer({ dest: './client/public/images' }); //replace '/public/images' with the proper path, in case it's wrong.
-/**
- * in .post requests, we'd do either upload.single('name') as a middleware, or upload.array('name', number) if it's an array of photos.
- * For both of those, req.body will have whatever text fields were passed in.
- */
+const app: Express = express();
+const PORT: number = 3000;
 
 app.use(cors());
 
@@ -31,18 +24,18 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, '../client/public')));
 
 // define route handler
-app.use('/', router);
+app.use('/', apiRouter);
 
 // Route handler to respond with main app
-app.get('*', (req, res) => {
+app.get('/*', (req: Request, res: Response) => {
   res.status(200).sendFile(path.join(__dirname, '../client/public/index.html'));
 });
 
 // CATCH-ALL ROUTE HANDLER
-app.use('*', (req, res) => res.sendStatus(404));
+app.use('*', (req: Request, res: Response) => res.sendStatus(404));
 
 // GLOBAL ERROR HANDLER
-app.use((err, req, res, next) => {
+app.use((err: any, req: Request, res: Response, next:NextFunction) => {
   const defaultErr = {
     log: 'Express error handler caught unknown middleware error',
     status: 500,
@@ -57,3 +50,5 @@ app.use((err, req, res, next) => {
 app.listen(PORT, () => {
   console.log(`Server listening on port: ${PORT}`);
 });
+
+export default app;

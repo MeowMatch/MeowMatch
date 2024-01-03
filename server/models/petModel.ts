@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose, { Document, Schema } from 'mongoose';
 
 const MONGO_URI =
   'mongodb+srv://meowmatch:letmein123@cluster0.2ullxmv.mongodb.net/?retryWrites=true&w=majority';
@@ -8,15 +8,20 @@ mongoose
   .then(() => console.log('Connect to Mongo DB.'))
   .catch((err) => console.log(err));
 
-const Schema = mongoose.Schema;
+interface IPet extends Document {
+  name: String;
+  age: Number;
+  description: String;
+  url: String;
+}
 
-const petSchema = new Schema({
+const petSchema = new Schema<IPet>({
   name: String,
   age: Number,
   description: String,
   url: String,
 });
 
-const Pet = mongoose.model('Pet', petSchema);
+const Pet = mongoose.model<IPet>('Pet', petSchema);
 
-module.exports = { Pet };
+export { Pet, IPet };

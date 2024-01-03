@@ -1,19 +1,23 @@
 import React, { useState } from 'react';
-import meow from '../public/soundfx/meow.mp3'
+// import meow from '../public/soundfx/meow.mp3'
 
-function InputForm({ refreshPetData }) {
+interface InputFormProps {
+  refreshPetData: () => void;
+}
+
+const InputForm: React.FC<InputFormProps> = ({ refreshPetData }) => {
   const [name, setName] = useState('');
-  const [age, setAge] = useState('');
+  const [age, setAge] = useState(0);
   const [description, setDescription] = useState('');
   const [url, setUrl] = useState('');
 
-  function submitSound(){
-    new Audio(meow).play();
-  }
+  // function submitSound(){
+  //   new Audio(meow).play();
+  // }
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    submitSound();
+    // submitSound();
 
     try {
       await fetch('http://localhost:3000/pets', {
@@ -25,7 +29,7 @@ function InputForm({ refreshPetData }) {
       });
       refreshPetData();
       setName('');
-      setAge('');
+      setAge(0);
       setDescription('');
       setUrl('');
     } catch (error) {
@@ -51,13 +55,12 @@ function InputForm({ refreshPetData }) {
             type="text"
             placeholder="Age"
             value={age}
-            onChange={(e) => setAge(e.target.value)}
+            onChange={(e) => setAge(Number(e.target.value))}
           />
         </label>
         <label className="label desc">
           Briefly describe your pet:
           <textarea
-            type="text"
             placeholder="Description"
             rows={5}
             value={description}
