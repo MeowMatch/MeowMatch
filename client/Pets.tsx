@@ -1,16 +1,15 @@
 import React, { useEffect } from 'react';
-import NavBar from './components/NavBar.jsx';
-import Body from './components/Body.jsx';
+import NavBar from './components/NavBar';
+import Body from './components/Body';
 import './public/style.css';
 
-function Pets() {
-
+const Pets: React.FC = () => {
   return (
     <div className="App">
       <NavBar />
       <Body />
     </div>
   );
-}
+};
 
 export default Pets;

@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "types": ["jest", "@testing-library/jest-dom", "node"],
+    "target": "es5",
+    "lib": ["dom", "es2015"],
+    "module": "commonjs",
+    "jsx": "react",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "outDir": "./dist",
+    "moduleResolution": "node"
+  },
+  "include": ["client/**/*.tsx", "client/**/*.ts"],
+  "exclude": ["node_modules"]
+}

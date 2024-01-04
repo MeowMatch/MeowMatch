@@ -1,8 +1,17 @@
 import React, { useEffect } from 'react';
-import PetCard from './PetCard.jsx';
+import PetCard from './PetCard';
+import { Pet } from '../types/pet.types'
 
-function PetCardHolder({ petData, setPetData }) {
-  const deletePet = (_id) => {
+interface PetCardHolderProps {
+  petData: Pet[];
+  setPetData: React.Dispatch<React.SetStateAction<Pet[]>>;
+}
+
+const PetCardHolder: React.FC<PetCardHolderProps> = ({
+  petData,
+  setPetData,
+}) => {
+  const deletePet = (_id: string) => {
     fetch(`http://localhost:3000/pets/${_id}`, {
       method: 'DELETE',
     })
@@ -27,7 +36,7 @@ function PetCardHolder({ petData, setPetData }) {
         if (!response.ok) {
           throw new Error('Error: Could not fetch pets');
         }
-        const data = await response.json();
+        const data: Pet[] = await response.json();
         setPetData(data);
       } catch (error) {
         console.error('There was a problem with the fetch operation:', error);
@@ -53,6 +62,6 @@ function PetCardHolder({ petData, setPetData }) {
       ))}
     </div>
   );
-}
+};
 
 export default PetCardHolder;

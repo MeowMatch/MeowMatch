@@ -1,18 +1,30 @@
-const path = require('path');
-const webpack = require('webpack');
+import path from 'path';
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-// import css from "file.css";
+import { Configuration as WebpackConfiguration } from 'webpack';
+import { Configuration as WebpackDevServerConfiguration } from 'webpack-dev-server';
 
-module.exports = {
+interface Configuration extends WebpackConfiguration {
+  devServer?: WebpackDevServerConfiguration;
+}
+
+const config: Configuration = {
   mode: 'development',
-  entry: './client/index.js',
+  entry: './client/index.tsx',
   output: {
     path: path.resolve(__dirname, 'dist'),
     publicPath: '/',
     filename: 'bundle.js',
   },
+  resolve: {
+    extensions: ['.ts', '.tsx', '.js'],
+  },
   module: {
     rules: [
+      {
+        test: /\.(ts|tsx)$/,
+        exclude: /node_modules/,
+        use: 'ts-loader',
+      },
       {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
@@ -39,16 +51,14 @@ module.exports = {
   ],
   devServer: {
     host: 'localhost',
-    port: 8080,
+    port: 8081,
     static: {
       directory: path.join(__dirname, 'public'),
     },
     open: true,
     hot: true,
     liveReload: true,
-    // compress: true,
     headers: { 'Access-Control-Allow-Origin': '*' },
-
     proxy: {
       '/api/**': {
         target: 'http://localhost:3000/',
@@ -58,14 +68,4 @@ module.exports = {
   },
 };
 
-/**
- * const path = require('path');
-
-    module.exports = {
-    entry: './src/index.js',
-    output: {
-    path: path.resolve(__dirname, 'dist'),
-    filename: 'bundle.js',
-  },
-};
- */
+export default config;
