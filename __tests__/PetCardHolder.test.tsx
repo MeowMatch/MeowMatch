@@ -10,7 +10,7 @@ fetchMock.enableMocks();
 
 const mockPetData = [
   {
-    _id: '65931c8fbe214fccbd84478c',
+    _id: '1',
     name: 'Fluffy',
     age: 3,
     description: 'Fluffy kitty',
@@ -48,7 +48,7 @@ describe('PetCardHolder', () => {
     await waitFor(() => {
       // Ensure that the delete operation was called with the correct URL and method
       expect(fetchMock).toHaveBeenCalledWith(
-        'http://localhost:3000/pets/65931c8fbe214fccbd84478c',
+        'http://localhost:3000/pets/1',
         {
           method: 'DELETE',
         }
