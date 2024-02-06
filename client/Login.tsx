@@ -1,7 +1,7 @@
 import React, { useState, ChangeEvent, FormEvent } from 'react';
 import { useHistory } from 'react-router-dom';
-// import './public/login.css';
-import './login.css';
+import './public/login.css';
+// import './login.css';
 
 const Login: React.FC = () => {
   const history = useHistory();
