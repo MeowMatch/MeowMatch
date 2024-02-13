@@ -1,2 +1,2 @@
 # MeowMatch
-Codesmith Scratch Project
+Pet Adoption Platform
